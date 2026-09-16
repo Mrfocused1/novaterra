@@ -33,8 +33,8 @@
      This box is cut to the market spread, but not tightly. The first pass cut
      to the markers themselves and the figure could not be labelled: the dot
      field ran to every edge, so SOUTH AFRICA, ZIMBABWE, GUYANA and SURINAME
-     had no clear position anywhere in the frame — every candidate either sat
-     on dots or threw a leader across half a continent. The map needs water
+     had no clear position anywhere in the frame — every candidate sat on dots,
+     and the nearest clean water was half a continent away. The map needs water
      next to a port before a label can go beside it, and this frame is the
      smallest one that has it:
 
@@ -57,10 +57,10 @@
   /* ------------------------------------------------------------- the markets
      dx/dy are map units from the marker to the point the label hangs on;
      anchor is which end of the text sits there. Declared here rather than down
-     with the labels because the markers, the rings, the outlines and the
-     leaders all need the same slug, and the slug is built from the label text:
-     Dubai is the United Arab Emirates node, so its slug cannot come from the
-     node's own name. */
+     with the labels because the markers, the outlines and the labels all need
+     the same slug, and the slug is built from the label text: Dubai is the
+     United Arab Emirates node, so its slug cannot come from the node's own
+     name. */
   const LABELS = {
     Guyana: { dx: 29, dy: -13, anchor: 'start' },
     Suriname: { dx: 66, dy: 7, anchor: 'start' },
@@ -152,28 +152,42 @@
   /* ---------------------------------------------------------------- labels */
   /* HTML rather than SVG text, so the type keeps a fixed size when the figure
      shrinks. Positioned in percentages of the crop, with a per-market offset in
-     map units — every one of them placed into open water and joined to its
-     marker by a leader, because there is no room for a label *on* this map:
-     South Africa's node sits 30 units inside its own dot field and Zimbabwe's
-     is landlocked, so anything set beside them lands on dots.
+     map units from the marker — and each offset is the nearest point to that
+     marker at which the word clears the dot field.
 
-     The water each one uses, and why:
-       Guyana / Suriname  the two nodes are ten map units apart, so their
-                          labels cannot both sit beside them. Both go out into
-                          the Atlantic — Guyana's above the Guianas, Suriname's
-                          below the equator — so the leaders diverge instead of
-                          crossing, and neither crosses the other's label.
-       Ghana              south into the Gulf of Guinea, in clear water below
-                          the coast it trades from.
-       Zimbabwe           east across the Mozambique Channel, held north of
-                          Madagascar (which occupies 84.6-88.8% across and
-                          58.9-74% down, and would otherwise catch the label).
-       South Africa       south-east into the Southern Ocean under the Cape.
-       Dubai              south into the Arabian Sea.
+     That last part is the whole difficulty of this figure. There is no room for
+     a label *on* the map: South Africa's node sits 30 units inside its own dot
+     field and Zimbabwe's is landlocked, so anything set beside them lands on
+     dots. So the offsets are not eyeballed. Each one comes from sweeping
+     candidate positions around its marker and keeping the closest that scores
+     no dot at any of six widths from 1920 down to 940 — the sweep has to run
+     across widths because the label is sized in pixels on a stage that scales,
+     and a position clean at 1680 catches a dot at 940, where the same word
+     covers more of the crop.
+
+     The water each one lands in, and what it costs:
+       Guyana / Suriname  the two nodes are ten map units apart, so their labels
+                          cannot both sit beside them; they diverge, Guyana's
+                          above the Guianas and Suriname's below and further
+                          east. Suriname's is the furthest on the figure, at 66
+                          units, because everything between there and its marker
+                          is South America.
+       Ghana              south into the Gulf of Guinea, just under its own
+                          coastline.
+       Zimbabwe           east into the Mozambique Channel, 32 units out. The
+                          second-longest reach, and unavoidable: the country is
+                          landlocked and ringed by dot field, so the channel is
+                          the only clear water it has.
+       South Africa       south-east under the Cape, into the Southern Ocean.
+       Dubai              south into the Arabian Sea, under the peninsula.
+
+     A label 66 units from its marker still reads as that marker's label — the
+     key beside the figure names all six, and pointing at either end lights
+     both — which is what makes the reach affordable at all.
 
      dx/dy are map units from the marker; anchor is which end of the text sits
      on that point. The table itself is declared up with the frame, because the
-     markers need the same slugs the labels do. */
+     markers and the outlines need the same slugs the labels do. */
 
   const pct = (x, y) => [
     ((x - bx) / bw) * 100,
@@ -211,8 +225,8 @@
      narrower the figure the further it reaches past its anchor — Dubai hangs
      91% of the way across and a phone pushes it off the right edge, where it is
      clipped mid-word. Nothing here re-anchors a label; it only gives back the
-     few pixels by which the text left the frame, which is why the leader still
-     points where it always did.
+     few pixels by which the text left the frame, so a word that was placed
+     against its marker is still against its marker.
 
      Hidden labels have no box to measure, so this is skipped for them and run
      again for the one that a tap brings back. */
@@ -285,7 +299,7 @@
     });
 
     /* On the map the events land on whichever part is on top — hit circle,
-       marker, ring or outline — so the handler reads the slug off whatever was
+       marker or outline — so the handler reads the slug off whatever was
        entered rather than wiring each one. Crossing open water between two
        markers finds no slug and drops the highlight, which is why this clears
        rather than only setting: a highlight that survived the pointer leaving
