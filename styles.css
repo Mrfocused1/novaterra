@@ -6,17 +6,39 @@
    ========================================================================== */
 
 :root {
-  --forest: #17352d;
-  --forest-dark: #10241f;
-  --paper: #fafaf6;
-  --mist: #dce4e0;
-  --sage: #8fa79b;
-  --slate: #68747a;
-  --rule: #b9c9c2;
+  /* NovaTerra brand palette, carried over from the original
+     novaterraconsultancy.com identity: espresso grounds, warm ivory paper and
+     a gold accent. The palette tokens below are brand values; the layout tokens
+     after them keep the names this stylesheet was built with, so every var()
+     reference in the file still resolves — --forest and --sage are simply what
+     the earlier green build called the ground and the accent. */
+  --deep: #1c130a;
+  --deep-alt: #241a0e;
+  --ivory: #faf6ee;
+  --ivory-deep: #f1e8d6;
+  --gold: #d4a54c;
+  --bronze: #a8703a;
+  --ink-soft: #5c4c3c;
+
+  --forest: var(--deep-alt);
+  --forest-dark: var(--deep);
+  --paper: var(--ivory);
+  --mist: var(--ivory-deep);
+  --sage: var(--gold);
+  --slate: var(--ink-soft);
+  --rule: rgba(30, 22, 16, .14);
   --pad: clamp(28px, 4vw, 72px);
   --clip: polygon(12% 0, 100% 0, 100% 74%, 86% 100%, 0 100%, 0 30%);
   --ease-out: cubic-bezier(.22, 1, .36, 1);
 }
+
+/* Gold is a shape colour on the light surfaces, not a type colour: #d4a54c is
+   only 2.1:1 on ivory, which is fine for the block behind the hero frame but
+   too pale for labels and display type. On the light sections the accent
+   deepens to bronze (3.9:1); the dark sections, the intro and the footer keep
+   the gold. Each section reads the accent through its own alias, so redefining
+   --sage here carries to all of them at once. */
+.hero, .who, .how, .mandate { --sage: var(--bronze); }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -40,11 +62,14 @@ img { max-width: 100%; }
   grid-template-columns: minmax(220px, 1fr) auto minmax(220px, 1fr);
   align-items: center;
   gap: 34px;
-  border-bottom: 1px solid rgba(23, 53, 45, .08);
+  border-bottom: 1px solid rgba(30, 22, 16, .08);
 }
 .brand { width: 280px; max-width: 100%; }
 .brand img { display: block; width: 100%; height: auto; }
-.desktop-nav { display: flex; align-items: center; gap: clamp(24px, 3vw, 54px); font-size: 14px; }
+/* Six labels, one of them "Executive Profile", is a wider bar than the five the
+   header was drawn for: the gap and the type step down so the row still fits
+   before it hands over to the menu button. */
+.desktop-nav { display: flex; align-items: center; gap: clamp(16px, 2.1vw, 42px); font-size: 13.5px; }
 .desktop-nav a, .text-link { position: relative; }
 .desktop-nav a::after, .text-link::after {
   content: ""; position: absolute; left: 0; right: 100%; bottom: -5px;
@@ -187,7 +212,7 @@ h1 span { display: block; color: var(--sage); }
      geometry can never disagree about their proportions. */
   aspect-ratio: var(--map-aspect, 1.9153);
   overflow: hidden;
-  background: radial-gradient(118% 128% at 46% 42%, rgba(143, 167, 155, .1), rgba(143, 167, 155, 0) 70%);
+  background: radial-gradient(118% 128% at 46% 42%, rgba(168, 112, 58, .1), rgba(168, 112, 58, 0) 70%);
 }
 .who__map-stage svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 
@@ -396,13 +421,77 @@ h1 span { display: block; color: var(--sage); }
 .mandate__actions { grid-column: 9 / 13; align-self: end; display: flex; flex-direction: column; align-items: flex-start; gap: 22px; }
 
 /* --------------------------------------------------------------------------
+   Executive Profile
+   -------------------------------------------------------------------------- */
+.profile {
+  --p-ink: var(--forest-dark);
+  --p-sage: var(--sage);
+  --p-slate: var(--slate);
+  --p-rule: var(--rule);
+  --p-clip: polygon(14% 0, 100% 0, 100% 76%, 86% 100%, 0 100%, 0 28%);
+  background: var(--paper);
+  padding: clamp(96px, 10vw, 168px) var(--pad) clamp(80px, 9vw, 144px);
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 32px;
+  color: var(--p-ink);
+  overflow: clip;
+}
+.profile__heading { grid-column: 1 / 8; grid-row: 1; }
+.profile__eyebrow { margin: 0 0 28px; color: var(--p-sage); font-size: 12px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; }
+.profile__heading h2 { margin: 0 0 20px; max-width: 900px; font-size: clamp(58px, 6vw, 104px); line-height: .98; letter-spacing: -.06em; font-weight: 200; text-wrap: balance; }
+.profile__role { margin: 0; color: var(--p-slate); font-size: 17px; line-height: 1.5; }
+
+/* There is no photograph of the founder in the assets, so the plate carries the
+   monogram the original site used in its place — staged with the same cut-corner
+   frame and offset back-block as the hero and the Who We Are figures, so it
+   reads as a portrait plate rather than as a missing image.
+
+   It spans both rows of the heading block, so the plate is as tall as the
+   heading and the reach strip together and the left column keeps no dead space
+   beneath the role line. */
+.profile__portrait { position: relative; grid-column: 9 / 13; grid-row: 1 / 3; margin: 0; min-height: clamp(300px, 25vw, 410px); }
+.profile__portrait-back, .profile__portrait-frame { position: absolute; inset: 0; clip-path: var(--p-clip); }
+.profile__portrait-back { transform: translate(4%, -5%); background: var(--mist); }
+.profile__portrait-frame { z-index: 2; display: grid; place-content: center; justify-items: center; gap: 16px; background: var(--forest); color: var(--paper); }
+.profile__monogram { color: var(--gold); font-size: clamp(60px, 6.4vw, 92px); font-weight: 200; line-height: 1; letter-spacing: -.04em; }
+.profile__portrait-frame p { margin: 0; padding-top: 16px; border-top: 1px solid rgba(250, 246, 238, .26); text-transform: uppercase; letter-spacing: .22em; font-size: 10px; }
+
+/* Reach reads as the caption strip the footprint figure uses: one rule, a label,
+   then the regions set as the statement beneath it. */
+.profile__reach {
+  grid-column: 1 / 8;
+  grid-row: 2;
+  align-self: end;
+  margin: 0;
+  padding-top: 26px;
+  border-top: 1px solid var(--p-sage);
+}
+.profile__reach-label { margin: 0; color: var(--p-sage); font-size: 12px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; }
+.profile__reach-regions { margin: 16px 0 0; font-size: clamp(19px, 1.5vw, 24px); font-weight: 200; line-height: 1.34; letter-spacing: -.02em; }
+
+/* Seven paragraphs is a long single column: two flowing columns hold the measure
+   near 60 characters and keep the profile from running twice the height of the
+   section beside it. The body sits on the first ten columns so the text keeps an
+   editorial measure instead of stretching the full grid. */
+.profile__body {
+  grid-column: 1 / 11;
+  grid-row: 3;
+  margin: clamp(48px, 5vw, 78px) 0 0;
+  columns: 2;
+  column-gap: clamp(32px, 4vw, 76px);
+}
+.profile__body p { margin: 0 0 22px; color: var(--p-slate); font-size: 17px; line-height: 1.65; }
+.profile__body p:first-child { color: var(--p-ink); font-size: 19px; line-height: 1.6; }
+
+/* --------------------------------------------------------------------------
    Footer
    -------------------------------------------------------------------------- */
 .site-footer {
   --f-bg: var(--forest-dark);
   --f-ink: var(--paper);
   --f-sage: var(--sage);
-  --f-rule: rgba(220, 228, 224, .32);
+  --f-rule: rgba(250, 246, 238, .26);
   background: var(--f-bg);
   color: var(--f-ink);
   padding: clamp(72px, 7vw, 112px) var(--pad) 40px;
@@ -443,7 +532,7 @@ h1 span { display: block; color: var(--sage); }
   --d-bg: var(--forest);
   --d-ink: var(--paper);
   --d-sage: var(--sage);
-  --d-rule: rgba(220, 228, 224, .55);
+  --d-rule: rgba(250, 246, 238, .42);
   background: var(--d-bg);
   color: var(--d-ink);
   padding: clamp(86px, 8vw, 138px) var(--pad);
@@ -568,10 +657,11 @@ html.js [data-reveal].is-revealed { opacity: 1; transform: none; }
 /* --------------------------------------------------------------------------
    Responsive
    -------------------------------------------------------------------------- */
-@media (max-width: 900px) {
-  :root { --pad: 26px; --clip: polygon(22% 0, 100% 0, 100% 78%, 78% 100%, 0 100%, 0 28%); }
-  .site-header { height: 112px; padding: 0 var(--pad); grid-template-columns: 1fr auto; }
-  .brand { width: 290px; }
+/* The menu button now takes over at 1080px rather than 900px. Between the two
+   the page keeps its desktop layout — only the header changes, so the six
+   labels never have to survive a bar too narrow to hold them. */
+@media (max-width: 1080px) {
+  .site-header { grid-template-columns: 1fr auto; }
   .desktop-nav, .header-cta { display: none; }
   .menu-toggle { display: grid; gap: 8px; width: 48px; padding: 10px 0; border: 0; background: none; cursor: pointer; }
   .menu-toggle span { display: block; height: 2px; background: var(--forest-dark); transition: transform .25s, opacity .25s; }
@@ -580,6 +670,11 @@ html.js [data-reveal].is-revealed { opacity: 1; transform: none; }
   .menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
   .mobile-menu { position: fixed; z-index: 20; inset: 112px 0 auto; padding: 22px var(--pad) 34px; background: var(--paper); border-bottom: 1px solid var(--rule); flex-direction: column; gap: 20px; }
   .mobile-menu.open { display: flex; }
+}
+
+@media (max-width: 900px) {
+  :root { --pad: 26px; --clip: polygon(22% 0, 100% 0, 100% 78%, 78% 100%, 0 100%, 0 28%); }
+  .brand { width: 290px; }
 
   .hero { min-height: auto; padding: 24px var(--pad) 0; display: flex; flex-direction: column; }
   .hero-media { order: 1; height: clamp(360px, 69vw, 620px); width: 100%; margin: 2px 0 64px; }
@@ -614,6 +709,17 @@ html.js [data-reveal].is-revealed { opacity: 1; transform: none; }
   .mandate__eyebrow, .mandate__inner h2, .mandate__body, .mandate__actions { grid-column: 1; }
   .mandate__inner h2 { font-size: clamp(42px, 11vw, 62px); margin-bottom: 22px; }
   .mandate__actions { margin-top: 32px; gap: 16px; align-self: stretch; }
+
+  .profile { display: flex; flex-direction: column; gap: 0; padding: 88px var(--pad) 96px; }
+  .profile__heading h2 { font-size: clamp(50px, 12vw, 78px); }
+  /* Stacked, the plate is a plain block again, so the min-height that keeps the
+     desktop plate tall has to be released or it overrides this height. */
+  .profile__portrait { order: 2; width: 100%; height: clamp(280px, 58vw, 380px); min-height: 0; margin-top: 44px; }
+  .profile__reach { order: 3; margin-top: 50px; }
+  .profile__reach-regions { margin-top: 16px; font-size: 21px; }
+  .profile__body { order: 4; columns: 1; margin-top: 46px; }
+  .profile__body p { font-size: 16px; }
+  .profile__body p:first-child { font-size: 17px; }
 
   .site-footer { padding-top: 74px; }
   .site-footer__top { grid-template-columns: minmax(0, 1fr); gap: 38px; }
@@ -745,8 +851,8 @@ html.is-intro { overflow: hidden; }
   pointer-events: none;
   background:
     radial-gradient(118% 88% at 62% 46%,
-      rgba(16, 36, 31, 0) 32%, rgba(16, 36, 31, .5) 76%, rgba(16, 36, 31, .8) 100%),
-    linear-gradient(to top, rgba(16, 36, 31, .72), rgba(16, 36, 31, 0) 28%);
+      rgba(28, 19, 10, 0) 32%, rgba(28, 19, 10, .5) 76%, rgba(28, 19, 10, .8) 100%),
+    linear-gradient(to top, rgba(28, 19, 10, .72), rgba(28, 19, 10, 0) 28%);
 }
 
 /* ---------------------------------------------------------------- layers */
@@ -931,7 +1037,7 @@ html.is-intro { overflow: hidden; }
   inset-block-start: clamp(22px, 4vh, 40px);
   inset-inline-end: var(--pad);
   padding: 10px 18px;
-  border: 1px solid rgba(143, 167, 155, .45);
+  border: 1px solid rgba(212, 165, 76, .45);
   border-radius: 999px;
   background: transparent;
   color: var(--mist);

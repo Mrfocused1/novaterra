@@ -20,30 +20,32 @@
     <button class="site-intro__skip" type="button" data-intro-skip>Skip intro</button>
   </div>
 
-  <header class="site-header">
-    <a class="brand" href="#" aria-label="NovaTerra home">
+  <header class="site-header" id="top">
+    <a class="brand" href="#top" aria-label="NovaTerra home">
       <img src="assets/logo.png" alt="NovaTerra Consultancy" />
     </a>
 
     <nav class="desktop-nav" aria-label="Primary navigation">
-      <a href="#expertise">Expertise</a>
-      <a href="#network">Global Network</a>
-      <a href="#projects">Projects</a>
+      <a href="#top">Home</a>
       <a href="#about">About</a>
+      <a href="#divisions">Divisions</a>
+      <a href="#how">Services</a>
+      <a href="#executive-profile">Executive Profile</a>
       <a href="#contact">Contact</a>
     </nav>
 
-    <a class="header-cta" href="#contact">Discuss an Opportunity <span>↗</span></a>
+    <a class="header-cta" href="#contact">Request a Mandate Call <span>↗</span></a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
   </header>
 
   <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
-    <a href="#expertise">Expertise</a>
-    <a href="#network">Global Network</a>
-    <a href="#projects">Projects</a>
+    <a href="#top">Home</a>
     <a href="#about">About</a>
+    <a href="#divisions">Divisions</a>
+    <a href="#how">Services</a>
+    <a href="#executive-profile">Executive Profile</a>
     <a href="#contact">Contact</a>
   </nav>
 
@@ -207,6 +209,40 @@
       <div class="divisions__progress" data-reveal="fade" aria-hidden="true"><i class="is-active"></i><i></i><i></i><i></i><i></i></div>
     </section>
 
+    <section class="profile" id="executive-profile" aria-labelledby="profile-title">
+      <header class="profile__heading" data-reveal>
+        <p class="profile__eyebrow">Executive Profile</p>
+        <h2 id="profile-title">Xiomara Devica</h2>
+        <p class="profile__role">Founder &amp; Principal Consultant</p>
+      </header>
+
+      <!-- No photograph of the founder exists in the assets, so the plate carries
+           the monogram the original site used in its place, staged with the same
+           cut-corner frame and offset back-block as the hero and Who We Are. -->
+      <figure class="profile__portrait" data-reveal>
+        <span class="profile__portrait-back" aria-hidden="true"></span>
+        <div class="profile__portrait-frame">
+          <span class="profile__monogram" aria-hidden="true">XD</span>
+          <p>NovaTerra Consultancy</p>
+        </div>
+      </figure>
+
+      <div class="profile__reach" data-reveal>
+        <p class="profile__reach-label">Operating across</p>
+        <p class="profile__reach-regions">Africa, South America, the Caribbean, the UAE and Europe</p>
+      </div>
+
+      <div class="profile__body" data-reveal>
+        <p>Xiomara Devica is the Founder and Principal Consultant of NovaTerra Consultancy, where she focuses on structuring and facilitating cross-border transactions, strategic partnerships and government-led opportunities across commodities, energy, infrastructure and natural resources.</p>
+        <p>She began her career in the diamond industry following professional education in the planning, grading and sorting of rough and polished diamonds, gaining hands-on industry experience across Congo-Kinshasa, South Africa, Zimbabwe and the UAE.</p>
+        <p>In Dubai, she worked with a DMCC-based trading company active in the gold and diamond sector, further developing her understanding of international commodity markets, trading relationships and cross-border transactions.</p>
+        <p>Throughout her career, Xiomara has facilitated transactions involving commodities, precious metals and fine minerals and has worked on securing funding and strategic partnerships for international projects. Her professional network has included relationships and collaboration with international legal, financial, commercial and industry partners.</p>
+        <p>Today, her work extends across Africa, South America, the Caribbean, the UAE and Europe, where she operates as a strategic connector between governments, investors, operators, suppliers and private-sector partners.</p>
+        <p>Her expertise extends beyond transaction facilitation into strategic procurement, investment, market entry, stakeholder alignment and cross-border negotiations. Her understanding of different markets, cultures and commercial environments enables her to identify opportunities and build relationships across regions that do not always naturally intersect.</p>
+        <p>Through NovaTerra, Xiomara combines sector knowledge, international relationships and entrepreneurial vision to transform opportunities into commercially viable partnerships and transactions.</p>
+      </div>
+    </section>
+
     <section class="mandate" id="mandate" aria-labelledby="mandate-title">
       <figure class="mandate__media" data-reveal>
         <span class="mandate__media-back" aria-hidden="true"></span>
@@ -217,9 +253,9 @@
       </figure>
 
       <div class="mandate__inner">
-        <p class="mandate__eyebrow" data-reveal>Start a mandate</p>
-        <h2 id="mandate-title" data-reveal>Bring us the mandate. <span>We'll bring the network.</span></h2>
-        <p class="mandate__body" data-reveal>Every engagement starts with a conversation — scope, KPIs, and a decision pathway defined from day one.</p>
+        <p class="mandate__eyebrow" data-reveal>Start a conversation</p>
+        <h2 id="mandate-title" data-reveal>Bring your mandate <span>to NovaTerra.</span></h2>
+        <p class="mandate__body" data-reveal>Whether you represent a government, institution, investor, operator, buyer or supplier, we welcome serious enquiries.</p>
         <div class="mandate__actions" data-reveal>
           <a class="button" href="#contact">Get in Touch <span aria-hidden="true">→</span></a>
           <a class="text-link" href="#divisions">View Services <span aria-hidden="true">→</span></a>
@@ -235,10 +271,11 @@
       </a>
 
       <nav class="site-footer__nav" data-reveal aria-label="Footer navigation">
-        <a href="#expertise">Expertise</a>
-        <a href="#network">Global Network</a>
-        <a href="#projects">Projects</a>
+        <a href="#top">Home</a>
         <a href="#about">About</a>
+        <a href="#divisions">Divisions</a>
+        <a href="#how">Services</a>
+        <a href="#executive-profile">Executive Profile</a>
         <a href="#contact">Contact</a>
       </nav>
 
