@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="NovaTerra Consultancy — trusted cross-border advisory and facilitation." />
+  <title>NovaTerra Consultancy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <!-- Decorative intro: progressive enhancement only. Without JS it never
+       displays, and intro.js removes it outright under reduced-motion. -->
+  <div class="site-intro" data-intro>
+    <div class="site-intro__stage" data-intro-stage></div>
+    <p class="site-intro__caption">Trusted international network</p>
+    <button class="site-intro__skip" type="button" data-intro-skip>Skip intro</button>
+  </div>
+
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="NovaTerra home">
+      <img src="assets/logo.png" alt="NovaTerra Consultancy" />
+    </a>
+
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="#expertise">Expertise</a>
+      <a href="#network">Global Network</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a class="header-cta" href="#contact">Discuss an Opportunity <span>↗</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+    <a href="#expertise">Expertise</a>
+    <a href="#network">Global Network</a>
+    <a href="#projects">Projects</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Cross-border advisory</p>
+        <h1 id="hero-title">Connecting opportunity with the partners to <span>move it forward.</span></h1>
+        <p class="intro">NovaTerra structures, facilitates and supports cross-border opportunities—connecting credible counterparties, investors, suppliers, governments and institutional partners through a trusted international network.</p>
+        <div class="hero-actions">
+          <a class="button" href="#expertise">Explore Our Expertise <span>→</span></a>
+          <a class="text-link" href="#contact">Start a Conversation <span>→</span></a>
+        </div>
+      </div>
+
+      <div class="hero-media" aria-label="International container port">
+        <div class="media-back media-back-one" aria-hidden="true"></div>
+        <div class="media-back media-back-two" aria-hidden="true"></div>
+        <div class="media-frame">
+          <!-- Muted, looping and inline, so it is allowed to autoplay. The poster
+               is the frame the markup falls back to if the file never arrives,
+               and script.js stops it outright under reduced-motion. -->
+          <video class="media-video" src="assets/hero-port.mp4"
+                 poster="assets/hero-port-poster.jpg"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Aerial view of container cranes working a cargo vessel at an international port"></video>
+        </div>
+        <p class="media-caption">Global trade / strategic delivery</p>
+      </div>
+
+      <nav class="sector-rail" id="expertise" aria-label="Areas of expertise">
+        <a href="#divisions"><b>01</b><span>Commodities</span></a>
+        <a href="#divisions"><b>02</b><span>Energy &amp; Infrastructure</span></a>
+        <a href="#divisions"><b>03</b><span>Minerals &amp; Precious Metals</span></a>
+        <a href="#divisions"><b>04</b><span>Strategic Projects</span></a>
+      </nav>
+    </section>
+
+    <section class="who" id="about" aria-labelledby="who-title">
+      <header class="who__heading" data-reveal>
+        <p class="who__eyebrow">Who we are</p>
+        <h2 id="who-title">A consultancy <span>built on a trusted, vetted network.</span></h2>
+      </header>
+
+      <div class="who__intro" data-reveal>
+        <p>From our head office in South Africa to active markets in Guyana, Suriname, Dubai, Ghana, and Zimbabwe, NovaTerra operates where mandates are won and lost on the ground — not just in the term sheet. Every engagement is mandate-driven, every transaction traceable, and every execution held to account.</p>
+        <a href="#how">How We Work <span aria-hidden="true">→</span></a>
+      </div>
+
+      <figure class="who__media who__media--port" data-reveal>
+        <span class="who__media-back" aria-hidden="true"></span>
+        <img src="assets/who-we-are-port.jpg" alt="Container cranes and stacked freight at an international port terminal" />
+      </figure>
+
+      <ul class="who__proofs" data-reveal aria-label="How NovaTerra operates">
+        <li>Mandate-driven</li>
+        <li>Traceable transactions</li>
+        <li>Accountable execution</li>
+      </ul>
+
+      <figure class="who__media who__media--documents" data-reveal>
+        <span class="who__media-back" aria-hidden="true"></span>
+        <img src="assets/who-we-are-documents.jpg" alt="A contract being signed by hand at a desk" loading="lazy" />
+      </figure>
+
+      <figure class="who__map" id="network" data-reveal data-who-map>
+        <figcaption class="who__map-caption">
+          <span>Operational footprint</span>
+          <span aria-hidden="true">Six markets · three continents</span>
+        </figcaption>
+        <div class="who__map-stage" data-who-map-stage role="img"
+             aria-label="World map showing NovaTerra's head office in South Africa and active markets in Ghana, Zimbabwe, Guyana, Suriname and Dubai."></div>
+        <!-- data-market ties each row to its marker, leader and label on the map,
+             so pointing at either end lights the same market. The slugs are built
+             from the label text in who-map.js — Dubai is the United Arab Emirates
+             node, which is why they do not match by name. -->
+        <ol class="who__markets" aria-label="NovaTerra operational footprint">
+          <li data-market="south-africa"><b>South Africa</b><span>Head office</span></li>
+          <li data-market="ghana"><b>Ghana</b><span>Active market</span></li>
+          <li data-market="zimbabwe"><b>Zimbabwe</b><span>Active market</span></li>
+          <li data-market="guyana"><b>Guyana</b><span>Active market</span></li>
+          <li data-market="suriname"><b>Suriname</b><span>Active market</span></li>
+          <li data-market="dubai"><b>Dubai</b><span>Active market</span></li>
+        </ol>
+      </figure>
+    </section>
+
+    <section class="how" id="how" aria-labelledby="how-title">
+      <header class="how__heading" data-reveal>
+        <p class="how__eyebrow">How we work</p>
+        <h2 id="how-title">Every mandate follows <span>the same discipline.</span></h2>
+      </header>
+
+      <p class="how__lead" data-reveal>Four stages, applied without exception — the same file discipline whether the mandate is a single cargo or a multi-year infrastructure programme.</p>
+
+      <ol class="how__steps">
+        <li data-reveal>
+          <b aria-hidden="true">01</b>
+          <h3>Mandate &amp; scope</h3>
+          <p>Nothing opens without a written mandate: what is being moved, between whom, on what terms, and what the outcome is measured against.</p>
+        </li>
+        <li data-reveal>
+          <b aria-hidden="true">02</b>
+          <h3>Verification</h3>
+          <p>Counterparties, title, capacity and compliance are verified before capital or cargo moves. Nothing is taken on representation.</p>
+        </li>
+        <li data-reveal>
+          <b aria-hidden="true">03</b>
+          <h3>Structuring</h3>
+          <p>Contract, instrument, logistics and payment pathways are structured across borders, with the right local partner attached to each leg.</p>
+        </li>
+        <li data-reveal>
+          <b aria-hidden="true">04</b>
+          <h3>Accountability</h3>
+          <p>We stay on the file through delivery — milestones tracked, documentation traceable, and outcomes reported against the KPIs set on day one.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="divisions" id="divisions" aria-labelledby="divisions-title" data-accordion>
+      <header class="divisions__heading" data-reveal>
+        <p>What we do</p>
+        <h2 id="divisions-title"><span>5 divisions.</span> One standard of diligence.</h2>
+      </header>
+
+      <div class="divisions__track" data-reveal="fade">
+        <article class="division is-active" data-item="0">
+          <h3>
+            <button id="division-button-1" type="button" aria-expanded="true" aria-controls="division-panel-1">
+              <span class="division__number">01</span><span class="division__name">Commodities</span><span class="division__control" aria-hidden="true">−</span>
+            </button>
+          </h3>
+          <div id="division-panel-1" class="division__panel" role="region" aria-labelledby="division-button-1">
+            <div class="division__inner">
+              <p>Sourcing, structuring and cross-border trade of agricultural and food commodities through a trusted international network.</p>
+              <a href="#commodities">Explore division <span aria-hidden="true">→</span></a>
+              <figure><span aria-hidden="true"></span><img src="assets/commodities.jpg" alt="Combine harvester working a wheat field at harvest" /></figure>
+              <small>One network / five specialisms</small>
+            </div>
+          </div>
+        </article>
+
+        <article class="division" data-item="1">
+          <h3><button id="division-button-2" type="button" aria-expanded="false" aria-controls="division-panel-2"><span class="division__number">02</span><span class="division__name">Energy &amp; Infrastructure</span><span class="division__control" aria-hidden="true">+</span></button></h3>
+          <div id="division-panel-2" class="division__panel" role="region" aria-labelledby="division-button-2"><div class="division__inner"><p>Market entry, investment facilitation and transaction structuring across petroleum, storage, logistics and infrastructure.</p><a href="#energy">Explore division <span aria-hidden="true">→</span></a><figure><span aria-hidden="true"></span><img src="assets/division-energy.jpg" alt="Industrial storage tanks and pipework at a fuel terminal" loading="lazy" /></figure></div></div>
+        </article>
+        <article class="division" data-item="2">
+          <h3><button id="division-button-3" type="button" aria-expanded="false" aria-controls="division-panel-3"><span class="division__number">03</span><span class="division__name">Minerals</span><span class="division__control" aria-hidden="true">+</span></button></h3>
+          <div id="division-panel-3" class="division__panel" role="region" aria-labelledby="division-button-3"><div class="division__inner"><p>Sourcing intelligence, technical verification and offtaker identification for diamonds and critical minerals.</p><a href="#minerals">Explore division <span aria-hidden="true">→</span></a><figure><span aria-hidden="true"></span><img src="assets/division-minerals.jpg" alt="Aerial view of an open-pit mine and its terraced workings" loading="lazy" /></figure></div></div>
+        </article>
+        <article class="division" data-item="3">
+          <h3><button id="division-button-4" type="button" aria-expanded="false" aria-controls="division-panel-4"><span class="division__number">04</span><span class="division__name">Gold &amp; Precious Metals</span><span class="division__control" aria-hidden="true">+</span></button></h3>
+          <div id="division-panel-4" class="division__panel" role="region" aria-labelledby="division-button-4"><div class="division__inner"><p>Buyer-seller alignment, testing, and refinery relationships for gold, doré, and precious metals.</p><a href="#precious-metals">Explore division <span aria-hidden="true">→</span></a><figure><span aria-hidden="true"></span><img src="assets/division-gold.jpg" alt="Cast gold and silver bullion bars" loading="lazy" /></figure></div></div>
+        </article>
+        <article class="division" data-item="4">
+          <h3><button id="division-button-5" type="button" aria-expanded="false" aria-controls="division-panel-5"><span class="division__number">05</span><span class="division__name">Government &amp; Institutional</span><span class="division__control" aria-hidden="true">+</span></button></h3>
+          <div id="division-panel-5" class="division__panel" role="region" aria-labelledby="division-button-5"><div class="division__inner"><p>Government mandates, public-private partnerships and market-entry strategy.</p><a href="#government">Explore division <span aria-hidden="true">→</span></a><figure><span aria-hidden="true"></span><img src="assets/division-government.jpg" alt="The colonnaded facade of a national parliament building" loading="lazy" /></figure></div></div>
+        </article>
+      </div>
+
+      <div class="divisions__progress" data-reveal="fade" aria-hidden="true"><i class="is-active"></i><i></i><i></i><i></i><i></i></div>
+    </section>
+
+    <section class="mandate" id="mandate" aria-labelledby="mandate-title">
+      <figure class="mandate__media" data-reveal>
+        <span class="mandate__media-back" aria-hidden="true"></span>
+        <video class="mandate__video" src="assets/mandate.mp4"
+               poster="assets/mandate-poster.jpg"
+               muted loop playsinline preload="none" data-video-on-view
+               aria-label="A container vessel under way on open ocean, seen from above"></video>
+      </figure>
+
+      <div class="mandate__inner">
+        <p class="mandate__eyebrow" data-reveal>Start a mandate</p>
+        <h2 id="mandate-title" data-reveal>Bring us the mandate. <span>We'll bring the network.</span></h2>
+        <p class="mandate__body" data-reveal>Every engagement starts with a conversation — scope, KPIs, and a decision pathway defined from day one.</p>
+        <div class="mandate__actions" data-reveal>
+          <a class="button" href="#contact">Get in Touch <span aria-hidden="true">→</span></a>
+          <a class="text-link" href="#divisions">View Services <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="site-footer__top">
+      <a class="site-footer__brand" href="#top" data-reveal aria-label="NovaTerra home">
+        <img src="assets/logo.png" alt="NovaTerra Consultancy" loading="lazy" />
+      </a>
+
+      <nav class="site-footer__nav" data-reveal aria-label="Footer navigation">
+        <a href="#expertise">Expertise</a>
+        <a href="#network">Global Network</a>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="site-footer__contact" data-reveal>
+        <p>Mandates, partnerships and market entry — brought to a desk that answers.</p>
+        <a class="site-footer__cta" href="#mandate">Start a Mandate <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+
+    <div class="site-footer__base" data-reveal>
+      <p>Head office — South Africa · Active markets in Guyana, Suriname, Dubai, Ghana and Zimbabwe</p>
+      <p>© <span data-year>2026</span> NovaTerra Consultancy. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="intro-data.js"></script>
+  <script src="intro.js"></script>
+  <script src="who-map.js"></script>
+</body>
+</html>

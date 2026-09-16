@@ -1,0 +1,968 @@
+/* ==========================================================================
+   NovaTerra — merged build
+   01 global tokens + header + hero + sector rail  (Handoff 01)
+   02 "Who We Are" section                          (Handoff 02)
+   03 "What We Do" divisions accordion              (Handoff 03)
+   ========================================================================== */
+
+:root {
+  --forest: #17352d;
+  --forest-dark: #10241f;
+  --paper: #fafaf6;
+  --mist: #dce4e0;
+  --sage: #8fa79b;
+  --slate: #68747a;
+  --rule: #b9c9c2;
+  --pad: clamp(28px, 4vw, 72px);
+  --clip: polygon(12% 0, 100% 0, 100% 74%, 86% 100%, 0 100%, 0 30%);
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--forest-dark);
+  font-family: "Manrope", Arial, sans-serif;
+  font-weight: 300;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; }
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+.site-header {
+  height: 112px;
+  padding: 0 var(--pad);
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) auto minmax(220px, 1fr);
+  align-items: center;
+  gap: 34px;
+  border-bottom: 1px solid rgba(23, 53, 45, .08);
+}
+.brand { width: 280px; max-width: 100%; }
+.brand img { display: block; width: 100%; height: auto; }
+.desktop-nav { display: flex; align-items: center; gap: clamp(24px, 3vw, 54px); font-size: 14px; }
+.desktop-nav a, .text-link { position: relative; }
+.desktop-nav a::after, .text-link::after {
+  content: ""; position: absolute; left: 0; right: 100%; bottom: -5px;
+  height: 1px; background: currentColor; transition: right .3s ease;
+}
+.desktop-nav a:hover::after, .text-link:hover::after { right: 0; }
+.header-cta {
+  justify-self: end; padding: 18px 28px; background: var(--forest-dark); color: white;
+  font-size: 14px; white-space: nowrap;
+}
+.header-cta span, .button span, .text-link span { margin-left: 14px; }
+.menu-toggle, .mobile-menu { display: none; }
+
+:where(a, button):focus-visible { outline: 2px solid var(--forest); outline-offset: 3px; }
+
+/* --------------------------------------------------------------------------
+   Hero + sector rail
+   -------------------------------------------------------------------------- */
+.hero {
+  min-height: calc(100vh - 112px);
+  padding: clamp(54px, 6vh, 88px) var(--pad) 0;
+  display: grid;
+  grid-template-columns: minmax(0, .93fr) minmax(520px, 1.07fr);
+  grid-template-rows: 1fr auto;
+  column-gap: clamp(50px, 6vw, 110px);
+}
+.hero-copy { align-self: center; max-width: 690px; padding-bottom: 38px; }
+.eyebrow {
+  display: flex; align-items: center; gap: 22px; margin: 0 0 28px;
+  color: var(--sage); text-transform: uppercase; letter-spacing: .26em;
+  font-size: 13px; font-weight: 500;
+}
+.eyebrow::after { content: ""; width: 72px; height: 1px; background: var(--sage); }
+h1 {
+  max-width: 680px; margin: 0 0 26px; font-size: clamp(55px, 5.15vw, 92px);
+  line-height: .98; letter-spacing: -.058em; font-weight: 200;
+}
+h1 span { display: block; color: var(--sage); }
+.intro { max-width: 620px; margin: 0; color: var(--slate); font-size: 16px; line-height: 1.75; }
+.hero-actions { display: flex; align-items: center; gap: 38px; margin-top: 34px; }
+.button { padding: 20px 30px; background: var(--forest); color: #fff; font-size: 15px; }
+.text-link { padding: 11px 0; border-bottom: 1px solid var(--forest); font-size: 15px; }
+
+.hero-media { position: relative; align-self: center; height: min(58vw, 650px); max-height: 650px; }
+.media-frame, .media-back { position: absolute; inset: 8% 2% 4% 0; clip-path: var(--clip); }
+.media-back-one { transform: translate(-4.8%, -3.5%); background: var(--sage); opacity: .92; }
+.media-back-two { transform: translate(2.6%, -7.5%); background: var(--mist); }
+.media-frame { z-index: 2; overflow: hidden; }
+.media-frame img, .media-frame video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 52%; display: block; }
+.media-caption {
+  position: absolute; z-index: 3; right: -25px; top: 17%; margin: 0;
+  writing-mode: vertical-rl; transform: rotate(180deg); text-transform: uppercase;
+  letter-spacing: .2em; color: var(--slate); font-size: 11px;
+}
+
+.sector-rail {
+  grid-column: 1 / -1; min-height: 92px; display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--rule); align-items: center;
+}
+.sector-rail a { display: flex; gap: 22px; align-items: baseline; padding: 28px 26px; text-transform: uppercase; letter-spacing: .16em; font-size: 11px; }
+.sector-rail a + a { border-left: 1px solid var(--rule); }
+.sector-rail b { color: var(--sage); font-size: 14px; font-weight: 400; }
+
+/* --------------------------------------------------------------------------
+   Who We Are
+   -------------------------------------------------------------------------- */
+.who {
+  --who-forest: var(--forest);
+  --who-ink: var(--forest-dark);
+  --who-paper: var(--paper);
+  --who-mist: var(--mist);
+  --who-sage: var(--sage);
+  --who-slate: var(--slate);
+  --who-rule: var(--rule);
+  --who-clip: polygon(14% 0, 100% 0, 100% 76%, 86% 100%, 0 100%, 0 28%);
+  background: var(--who-paper);
+  padding: clamp(96px, 10vw, 168px) var(--pad) clamp(80px, 9vw, 144px);
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 32px;
+  color: var(--who-ink);
+  overflow: clip;
+}
+.who__heading { grid-column: 1 / 8; }
+.who__eyebrow { margin: 0 0 28px; color: var(--who-sage); font-size: 12px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; }
+.who__heading h2 { margin: 0; max-width: 900px; font-size: clamp(58px, 6vw, 104px); line-height: .98; letter-spacing: -.06em; font-weight: 200; text-wrap: balance; }
+.who__heading h2 span { display: block; color: var(--who-sage); }
+.who__intro { grid-column: 8 / 13; align-self: end; padding-bottom: 26px; }
+.who__intro p { margin: 0 0 22px; max-width: 610px; color: var(--who-slate); font-size: 17px; line-height: 1.6; }
+.who__intro a { display: inline-block; padding-bottom: 7px; border-bottom: 1px solid currentColor; font-size: 20px; }
+.who__media { position: relative; margin: 46px 0 0; }
+.who__media img, .who__media-back { position: absolute; inset: 0; width: 100%; height: 100%; clip-path: var(--who-clip); }
+.who__media img { z-index: 2; object-fit: cover; }
+.who__media-back { transform: translate(3%, -4%); background: var(--who-mist); }
+.who__media--port { grid-column: 1 / 8; height: clamp(360px, 32vw, 540px); }
+.who__media--port::after { content: ""; position: absolute; z-index: 3; right: -10%; bottom: 1%; width: 23%; height: 1px; background: var(--who-sage); }
+.who__proofs { grid-column: 8 / 10; margin: 68px 0 0; padding: 0; list-style: none; align-self: center; }
+.who__proofs li { padding: 24px 0; border-bottom: 1px solid var(--who-rule); text-transform: uppercase; letter-spacing: .18em; font-size: 12px; }
+.who__media--documents { grid-column: 10 / 13; height: clamp(330px, 28vw, 480px); }
+.who__markets { grid-column: 1 / -1; position: relative; display: grid; grid-template-columns: repeat(6, 1fr); gap: 22px; margin: 68px 0 0; padding: 28px 0 0; border-top: 1px solid var(--who-sage); list-style: none; }
+.who__markets li { position: relative; display: grid; gap: 5px; padding-left: 14px; }
+.who__markets li::before { content: ""; position: absolute; left: 0; top: -35px; width: 13px; height: 13px; background: var(--who-sage); }
+.who__markets b, .who__markets span { text-transform: uppercase; letter-spacing: .17em; font-size: 11px; }
+.who__markets b { font-weight: 400; }
+.who__markets span { color: var(--who-sage); }
+
+/* The footprint figure: the intro's dot-matrix world, cropped to the band that
+   holds all six markets and frozen. Geometry is drawn by who-map.js into the
+   stage from the same generated data the intro uses, so the two can never
+   disagree about where a market is.
+
+   It is deliberately a quiet figure, not a second hero: it costs ~465px of
+   height, where a full-measure stage with a six-across key underneath cost 890
+   — most of a second hero for a caption. */
+.who__map {
+  grid-column: 1 / -1;
+  margin: 68px 0 0;
+  padding-top: 22px;
+  border-top: 1px solid var(--who-rule);
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0 32px;
+  align-items: center;
+}
+.who__map-caption {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 0 0 16px;
+  color: var(--who-sage);
+  opacity: .78;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-size: 10px;
+}
+.who__map-stage {
+  position: relative;
+  /* Set by who-map.js from the crop it actually drew, so the frame and the
+     geometry can never disagree about their proportions. */
+  aspect-ratio: var(--map-aspect, 1.9153);
+  overflow: hidden;
+  background: radial-gradient(118% 128% at 46% 42%, rgba(143, 167, 155, .1), rgba(143, 167, 155, 0) 70%);
+}
+.who__map-stage svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* The caption row spans the grid, so it needs its own row above both tracks.
+   The columns are pinned rather than auto-placed: the base .who__markets rule
+   already claims `grid-column: 1 / -1` for the six-across strip this figure
+   replaced, and an auto-placed stage loses that fight.
+
+   Track 1/8 against 9/13 puts the map under the heading above it and the key at
+   the section's right-hand edge, so the pair reads as figure-and-legend rather
+   than as two objects with a hole between them. */
+.who__map-caption { grid-column: 1 / -1; grid-row: 1; }
+.who__map-stage { grid-column: 1 / 8; grid-row: 2; }
+.who__map .who__markets { grid-column: 9 / 13; grid-row: 2; }
+
+/* Beside the map, not under it: the list is the legend, and reading it as one
+   column against the map costs no extra height at all. */
+.who__map .who__markets {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border-top: 0;
+}
+.who__map .who__markets li { padding: 11px 0 11px 17px; border-bottom: 1px solid var(--who-rule); }
+.who__map .who__markets li::before { left: 0; top: 14px; width: 7px; height: 7px; }
+.who__map .who__markets b, .who__map .who__markets span { font-size: 10px; letter-spacing: .14em; }
+.who__map .who__markets b { color: var(--who-ink); }
+.who__map .who__markets span { opacity: .9; }
+
+/* Labels are HTML, not SVG text: positioned in percentages they ride the scale
+   with the map, but their type stays a fixed size and stays legible when the
+   figure is only a few hundred pixels wide. */
+.who__map-label {
+  position: absolute;
+  z-index: 2;
+  /* Ink, not sage. The labels used to be set in the same grey-green as the
+     land, at 9.5px — so they read as part of the dot field rather than as type
+     laid over it, which is most of why the figure looked like texture. The
+     darkest token in the section separates them from the geometry and gives
+     them 15:1 against the paper, and the extra pixel of size carries the
+     tracking that .14em costs. */
+  color: var(--who-ink);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: 10.5px;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 600ms var(--ease-out);
+}
+/* The hub is distinguished by its ring and its weight, not by a second colour. */
+.who__map-label--hub { font-weight: 500; }
+.who__map.is-in .who__map-label { opacity: 1; }
+
+/* ------------------------------------------------------------ map geometry
+   Quiet, but not invisible. The first pass ran the land dots at .22 and the
+   figure read as paper texture rather than as a map; .34 is the point where the
+   coastlines resolve without the dot field becoming the loudest thing in the
+   section. */
+.who-map__grid   { fill: var(--who-sage); opacity: .42; }
+.who-map__africa { fill: var(--who-sage); opacity: .60; }
+.who-map__focus  { fill: var(--who-forest); opacity: .78; }
+.who-map__outline { fill: none; stroke: var(--who-forest); stroke-width: .7; opacity: 0; }
+.who__map.is-in .who-map__outline { opacity: .55; }
+.who-map__node { fill: var(--who-forest); opacity: 0; }
+/* Six markets, not three. The marker used to fall back to sage for the markets
+   without a country outline, which left Guyana, Suriname and Dubai reading as
+   ghosts of the other three in a figure whose whole subject is that there are
+   six of them. */
+.who-map__node--related { fill: var(--who-forest); }
+.who__map.is-in .who-map__node { opacity: .9; }
+/* The rings and the leaders are gone. A ring around a marker six pixels wide was
+   a second mark for the same fact, and a rule from a label to its own marker is
+   a line the eye draws anyway across a gap that short. */
+
+/* One state change on entry: the geometry fades up as a single layer, then the
+   six markers land. Everything is off under reduced motion. */
+.who-map__grid, .who-map__africa, .who-map__focus,
+.who-map__outline, .who-map__node {
+  transition: opacity 900ms var(--ease-out);
+}
+.who__map.is-in .who-map__node { transition-delay: 260ms; }
+.who__map.is-in .who-map__outline { transition-delay: 380ms; }
+
+/* ------------------------------------------------------- the market you pick
+   The figure and the key are one object with two ends, and this is the half of
+   that idea the stylesheet carries: point at a market anywhere and the other
+   five step back, on the map and in the list together.
+
+   Dimming is the whole mechanism — no second colour, no emphasis bar, nothing
+   that would need explaining. The land drops far enough that the picked
+   market's own boundary and marker are the only things at full strength, and the
+   codes are drawn as single paths (all of Africa in one, all six focus
+   countries in another), so dimming cannot single out one country's dots; the
+   picked country is named by its boundary instead, which is the mark it
+   already had. */
+.who-map__hit { fill: none; pointer-events: all; cursor: pointer; }
+
+.who__map.has-active .who-map__grid    { opacity: .2; }
+.who__map.has-active .who-map__africa  { opacity: .3; }
+.who__map.has-active .who-map__focus   { opacity: .34; }
+.who__map.has-active .who-map__outline { opacity: .16; }
+.who__map.has-active .who-map__node    { opacity: .18; }
+.who__map.has-active .who__map-label   { opacity: .22; }
+
+.who__map.has-active .who-map__outline.is-active { opacity: 1; stroke-width: 1.1; }
+.who__map.has-active .who-map__node.is-active    { opacity: 1; transform: scale(1.55); }
+.who__map.has-active .who__map-label.is-active   { opacity: 1; }
+
+/* The marker grows about its own centre rather than the SVG's origin, which is
+   the top-left corner of the crop and would fling it across the map. The delay
+   is reset for the transform only: the reveal staggers the markers 260ms, and
+   leaving that in place would make every hover arrive late. */
+.who-map__node {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: opacity 900ms var(--ease-out), transform 300ms var(--ease-out);
+}
+.who__map.is-in .who-map__node { transition-delay: 260ms, 0ms; }
+
+/* The key's square is already there at rest; picking a row fills it and pushes
+   the name to the weight the hub label carries on the map. */
+.who__markets li { cursor: pointer; }
+.who__markets li::before { transition: background 300ms var(--ease-out), transform 300ms var(--ease-out); }
+.who__map .who__markets li.is-active::before { background: var(--who-forest); transform: scale(1.6); }
+.who__map .who__markets li.is-active b { font-weight: 500; }
+.who__map.has-active .who__markets li { opacity: .4; }
+.who__map.has-active .who__markets li.is-active { opacity: 1; }
+
+/* --------------------------------------------------------------------------
+   How We Work
+   -------------------------------------------------------------------------- */
+.how {
+  --how-ink: var(--forest-dark);
+  --how-sage: var(--sage);
+  --how-slate: var(--slate);
+  --how-rule: var(--rule);
+  background: var(--paper);
+  padding: clamp(96px, 10vw, 168px) var(--pad);
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 32px;
+  color: var(--how-ink);
+}
+.how__heading { grid-column: 1 / 8; }
+.how__eyebrow { margin: 0 0 28px; color: var(--how-sage); font-size: 12px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; }
+.how__heading h2 { margin: 0; max-width: 900px; font-size: clamp(58px, 6vw, 104px); line-height: .98; letter-spacing: -.06em; font-weight: 200; text-wrap: balance; }
+.how__heading h2 span { display: block; color: var(--how-sage); }
+.how__lead { grid-column: 8 / 13; align-self: end; margin: 0 0 26px; max-width: 610px; color: var(--how-slate); font-size: 17px; line-height: 1.6; }
+
+/* Four steps on one rule, echoing the sector rail: the column dividers are the
+   structure, so no card, box or shadow is needed to separate them. */
+.how__steps {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: clamp(50px, 5vw, 78px) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--how-rule);
+  list-style: none;
+}
+.how__steps li { padding: 32px 30px 4px 0; }
+.how__steps li + li { padding-left: 30px; border-left: 1px solid var(--how-rule); }
+.how__steps b { display: block; margin-bottom: 42px; color: var(--how-sage); font-size: clamp(42px, 3.4vw, 62px); font-weight: 200; line-height: 1; }
+.how__steps h3 { margin: 0 0 14px; font-size: 17px; font-weight: 400; letter-spacing: -.01em; }
+.how__steps p { margin: 0; max-width: 300px; color: var(--how-slate); font-size: 15px; line-height: 1.65; }
+
+/* --------------------------------------------------------------------------
+   Start a mandate
+   -------------------------------------------------------------------------- */
+.mandate {
+  --m-ink: var(--forest-dark);
+  --m-sage: var(--sage);
+  --m-slate: var(--slate);
+  background: var(--paper);
+  padding: clamp(90px, 9vw, 150px) var(--pad) clamp(100px, 11vw, 180px);
+  overflow: clip;
+}
+.mandate__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding-top: clamp(46px, 5vw, 72px);
+  border-top: 1px solid var(--m-sage);
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 26px 32px;
+}
+/* The section's opening image. It sits on the same 1180px measure as the copy
+   beneath it and borrows the site's cut-corner clip, so it reads as the same
+   family as the hero and the Who We Are figures rather than as a stock banner. */
+.mandate__media {
+  position: relative;
+  max-width: 1180px;
+  margin: 0 auto clamp(54px, 6vw, 96px);
+  height: clamp(220px, 26vw, 400px);
+}
+.mandate__media img, .mandate__media video, .mandate__media-back { position: absolute; inset: 0; width: 100%; height: 100%; clip-path: var(--clip); }
+.mandate__media img, .mandate__media video { z-index: 2; object-fit: cover; object-position: 50% 50%; display: block; }
+.mandate__media-back { transform: translate(2%, -3%); background: var(--m-sage); opacity: .55; }
+.mandate__eyebrow { grid-column: 1 / -1; margin: 0 0 6px; color: var(--m-sage); font-size: 12px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; }
+.mandate__inner h2 { grid-column: 1 / 10; margin: 0 0 30px; font-size: clamp(46px, 5.4vw, 94px); line-height: 1; letter-spacing: -.058em; font-weight: 200; text-wrap: balance; }
+.mandate__inner h2 span { display: block; color: var(--m-sage); }
+.mandate__body { grid-column: 1 / 7; margin: 0; max-width: 560px; color: var(--m-slate); font-size: 17px; line-height: 1.65; }
+.mandate__actions { grid-column: 9 / 13; align-self: end; display: flex; flex-direction: column; align-items: flex-start; gap: 22px; }
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+.site-footer {
+  --f-bg: var(--forest-dark);
+  --f-ink: var(--paper);
+  --f-sage: var(--sage);
+  --f-rule: rgba(220, 228, 224, .32);
+  background: var(--f-bg);
+  color: var(--f-ink);
+  padding: clamp(72px, 7vw, 112px) var(--pad) 40px;
+}
+.site-footer__top {
+  display: grid;
+  grid-template-columns: minmax(240px, 1.1fr) auto minmax(260px, 1fr);
+  gap: 40px clamp(30px, 5vw, 86px);
+  align-items: start;
+  padding-bottom: clamp(48px, 5vw, 72px);
+  border-bottom: 1px solid var(--f-rule);
+}
+.site-footer__brand { display: block; width: 260px; max-width: 100%; }
+.site-footer__brand img { display: block; width: 100%; height: auto; }
+.site-footer__nav { display: grid; gap: 14px; font-size: 14px; }
+.site-footer__nav a { justify-self: start; color: var(--f-sage); transition: color 250ms ease; }
+.site-footer__nav a:hover { color: var(--f-ink); }
+.site-footer__contact { justify-self: end; max-width: 340px; }
+.site-footer__contact p { margin: 0 0 22px; color: var(--f-sage); font-size: 15px; line-height: 1.65; }
+.site-footer__cta { display: inline-flex; align-items: center; padding-bottom: 8px; border-bottom: 1px solid var(--f-ink); font-size: 16px; }
+.site-footer__cta span { margin-left: 12px; }
+.site-footer__base {
+  padding-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px 30px;
+  color: var(--f-sage);
+  font-size: 12px;
+  letter-spacing: .05em;
+}
+.site-footer__base p { margin: 0; }
+
+/* --------------------------------------------------------------------------
+   What We Do — divisions accordion
+   -------------------------------------------------------------------------- */
+.divisions {
+  --d-bg: var(--forest);
+  --d-ink: var(--paper);
+  --d-sage: var(--sage);
+  --d-rule: rgba(220, 228, 224, .55);
+  background: var(--d-bg);
+  color: var(--d-ink);
+  padding: clamp(86px, 8vw, 138px) var(--pad);
+}
+.divisions__heading p { margin: 0 0 24px; color: var(--d-sage); font-size: 12px; letter-spacing: .3em; text-transform: uppercase; }
+.divisions__heading h2 { margin: 0 0 46px; color: var(--d-sage); font-size: clamp(60px, 6.2vw, 108px); line-height: 1; letter-spacing: -.06em; font-weight: 200; }
+.divisions__heading h2 span { color: var(--d-ink); }
+.divisions__track { display: flex; min-height: 560px; border: 1px solid var(--d-rule); }
+
+/* In the columns layout the track is a fixed-height stage. Left to size itself
+   it follows its tallest child, and that child changes the moment a division
+   opens: the header of the division that just went inactive grows to its
+   vertical name (112px -> 340px) while its panel is still closing, so the
+   track ballooned from 560 to 774 and collapsed again on every hover, taking
+   the page with it. --track-h is the tallest resting configuration, measured
+   in script.js; the stacked layout below 900px is left to size itself, where
+   growing with the open item is the expected behaviour. */
+@media (min-width: 901px) {
+  .js .divisions__track { height: var(--track-h, 560px); min-height: 0; }
+}
+
+/* Measurement pass for --track-h: every panel rendered at its natural height
+   with transitions suspended, so the tallest can be read without animating. */
+.divisions.is-measuring .division,
+.divisions.is-measuring .division h3 button,
+.divisions.is-measuring .division__number,
+.divisions.is-measuring .division__name,
+.divisions.is-measuring .division__panel { transition: none !important; }
+.divisions.is-measuring .division__panel { display: block !important; height: auto !important; }
+.division { flex: .72 1 0; min-width: 116px; border-left: 1px solid var(--d-rule); transition: flex 520ms var(--ease-out); overflow: hidden; }
+.division:first-child { border-left: 0; }
+.division.is-active { flex: 5 1 0; }
+.division h3 { margin: 0; }
+.division h3 button { position: relative; width: 100%; min-height: 112px; padding: 30px; display: flex; align-items: center; gap: 20px; color: inherit; background: none; border: 0; font: inherit; text-align: left; cursor: pointer; transition: padding 520ms var(--ease-out), gap 520ms var(--ease-out); }
+.division h3 button:focus-visible { outline: 2px solid var(--d-ink); outline-offset: -6px; }
+.division__number { color: var(--d-sage); font-size: clamp(52px, 5vw, 84px); font-weight: 200; line-height: 1; transition: font-size 520ms var(--ease-out); }
+.division__name {
+  font-size: 22px; font-weight: 300;
+  /* The header is where the accordion popped. The closed state holds a 280px
+     vertical name and the open state a 30px horizontal one, so the button
+     measured 340px and 132px — and because min-height was declared only in the
+     closed state, the box snapped between the two inside a single frame while
+     the panel beside it glided across all 520ms. Declaring the floor in both
+     states lets the box interpolate: the number (72px) holds the button at 132
+     once the name falls below it, which is exactly the open height, so the
+     header now travels smoothly to the same resting size it always had. */
+  min-height: 0;
+  transition: min-height 520ms var(--ease-out);
+}
+/* Pinned to the button's vertical centre rather than left in the flex row. The
+   closed column has no room for it in flow (see below), and anchoring it to 50%
+   means it rides the header as the header's height animates, instead of hopping
+   between two resting positions — which is what it used to do. */
+.division__control { position: absolute; top: 50%; right: 30px; transform: translateY(-50%); font-size: 28px; font-weight: 200; }
+
+/* A closed column is 115-162px wide, and the button was spending 60px of that on
+   side padding — leaving ~61px to hold a 52-84px numeral, a 23px vertical label
+   and the control. They never fit: `overflow: hidden` on .division cut the label
+   and the control away, so every closed division rendered as a bare numeral with
+   no name against it. The closed state gets tighter padding, a smaller numeral
+   and the control out of flow, sized to leave the control its own column: the
+   label must finish before the control begins, which at the narrowest the column
+   ever gets (115px) means 10 + numeral + 10 + 23 <= 115 - 10 - 15. Both the
+   numeral and the padding transition, so the numeral grows into place as the
+   column opens rather than snapping between two sizes. */
+.division:not(.is-active) h3 button { padding: 30px 10px; gap: 10px; }
+.division:not(.is-active) .division__number { font-size: clamp(34px, 2.9vw, 46px); }
+.division:not(.is-active) .division__control { right: 10px; }
+.division:not(.is-active) .division__name {
+  flex: none;
+  writing-mode: vertical-rl; min-height: 280px; font-size: 17px;
+}
+.division__panel { overflow: clip; }
+.division__inner { padding: 0 30px 32px; display: grid; grid-template-columns: minmax(240px, .75fr) minmax(320px, 1.25fr); gap: 28px; align-items: end; }
+.division__inner > p { align-self: start; margin: 12px 0; max-width: 390px; font-size: 17px; line-height: 1.55; }
+.division__inner > a { grid-column: 1; align-self: start; justify-self: start; padding-bottom: 7px; border-bottom: 1px solid currentColor; }
+.division__inner figure { grid-column: 2; grid-row: 1 / span 3; position: relative; height: 400px; margin: 0; }
+.division__inner figure span, .division__inner figure img { position: absolute; inset: 0; width: 100%; height: 100%; clip-path: polygon(18% 0, 100% 0, 100% 76%, 84% 100%, 0 100%, 0 24%); }
+.division__inner figure span { background: var(--d-sage); transform: translate(3%, -4%); opacity: .65; }
+.division__inner figure img { object-fit: cover; }
+.division__inner small { grid-column: 1; color: var(--d-sage); letter-spacing: .24em; text-transform: uppercase; }
+.divisions__progress { margin-top: 34px; display: flex; justify-content: space-between; align-items: center; position: relative; }
+.divisions__progress::before { content: ""; position: absolute; left: 1%; right: 1%; height: 1px; background: var(--d-rule); }
+.divisions__progress i { z-index: 1; width: 18px; height: 18px; border: 1px solid var(--d-ink); border-radius: 50%; background: var(--d-bg); transition: background-color 320ms ease; }
+.divisions__progress i.is-active { background: var(--d-sage); }
+
+/* Progressive enhancement: the accordion only collapses once JS is running, so
+   with JavaScript disabled every division reads as a plain stacked list. */
+.js .division__panel { height: 0; opacity: 0; }
+.js .division.is-active .division__panel { height: auto; opacity: 1; }
+.js .division:not(.is-active):not(.is-closing) > .division__panel { display: none; }
+html:not(.js) .divisions__track { display: block; min-height: 0; }
+html:not(.js) .division { border-left: 0; border-top: 1px solid var(--d-rule); }
+html:not(.js) .division:first-child { border-top: 0; }
+html:not(.js) .division:not(.is-active) .division__name { writing-mode: initial; min-height: 0; }
+html:not(.js) .division__inner { display: block; }
+html:not(.js) .division__inner figure { height: min(46vw, 380px); }
+
+/* --------------------------------------------------------------------------
+   Scroll reveals
+
+   Every tagged element fades in while travelling 24px down into place, and
+   fades out while travelling back up out of it — so the direction of travel
+   always matches the direction of the scroll. Which of the two offsets applies
+   is not baked into the class: script.js writes --reveal-dir from the edge the
+   element is entering or leaving by, and these rules only read it.
+
+   Scoped to html.js because the hidden state is opacity 0: without JavaScript
+   nothing would ever set --reveal-dir's counterpart, and the page would be
+   blank.
+   -------------------------------------------------------------------------- */
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(calc(var(--reveal-dir, 1) * 24px));
+  transition:
+    opacity 640ms var(--ease-out) var(--reveal-delay, 0ms),
+    transform 640ms var(--ease-out) var(--reveal-delay, 0ms);
+}
+html.js [data-reveal="fade"] { transform: none; }
+html.js [data-reveal].is-revealed { opacity: 1; transform: none; }
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  :root { --pad: 26px; --clip: polygon(22% 0, 100% 0, 100% 78%, 78% 100%, 0 100%, 0 28%); }
+  .site-header { height: 112px; padding: 0 var(--pad); grid-template-columns: 1fr auto; }
+  .brand { width: 290px; }
+  .desktop-nav, .header-cta { display: none; }
+  .menu-toggle { display: grid; gap: 8px; width: 48px; padding: 10px 0; border: 0; background: none; cursor: pointer; }
+  .menu-toggle span { display: block; height: 2px; background: var(--forest-dark); transition: transform .25s, opacity .25s; }
+  .menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
+  .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
+  .mobile-menu { position: fixed; z-index: 20; inset: 112px 0 auto; padding: 22px var(--pad) 34px; background: var(--paper); border-bottom: 1px solid var(--rule); flex-direction: column; gap: 20px; }
+  .mobile-menu.open { display: flex; }
+
+  .hero { min-height: auto; padding: 24px var(--pad) 0; display: flex; flex-direction: column; }
+  .hero-media { order: 1; height: clamp(360px, 69vw, 620px); width: 100%; margin: 2px 0 64px; }
+  .media-frame, .media-back { inset: 7% 6% 1% 2%; }
+  .media-back-one { transform: translate(-2%, -2%); }
+  .media-back-two { transform: translate(4%, -6%); }
+  .media-caption { right: -2px; top: 18%; font-size: 10px; }
+  .hero-copy { order: 2; max-width: none; padding-bottom: 36px; }
+  .eyebrow { margin-bottom: 24px; font-size: 11px; }
+  h1 { font-size: clamp(52px, 12vw, 84px); max-width: 760px; line-height: 1.01; }
+  .intro { font-size: 16px; line-height: 1.65; }
+  .hero-actions { flex-direction: column; align-items: stretch; gap: 14px; }
+  .button { text-align: center; padding: 20px 24px; }
+  .text-link { align-self: flex-start; }
+  .sector-rail { order: 3; grid-template-columns: repeat(2, 1fr); width: 100%; }
+  .sector-rail a { min-height: 92px; flex-direction: column; gap: 5px; justify-content: center; padding: 18px 14px; }
+  .sector-rail a:nth-child(3), .sector-rail a:nth-child(4) { border-top: 1px solid var(--rule); }
+  .sector-rail a:nth-child(3) { border-left: 0; }
+
+  .how { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 88px var(--pad) 96px; }
+  .how__heading, .how__lead, .how__steps { grid-column: 1; }
+  .how__heading h2 { font-size: clamp(52px, 12vw, 78px); }
+  .how__lead { margin: 26px 0 0; }
+  .how__steps { grid-template-columns: minmax(0, 1fr); margin-top: 44px; }
+  .how__steps li { padding: 26px 0; }
+  .how__steps li + li { padding-left: 0; border-left: 0; border-top: 1px solid var(--how-rule); }
+  .how__steps b { margin-bottom: 16px; font-size: 44px; }
+  .how__steps p { max-width: none; }
+
+  .mandate { padding: 78px var(--pad) 92px; }
+  .mandate__inner { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .mandate__eyebrow, .mandate__inner h2, .mandate__body, .mandate__actions { grid-column: 1; }
+  .mandate__inner h2 { font-size: clamp(42px, 11vw, 62px); margin-bottom: 22px; }
+  .mandate__actions { margin-top: 32px; gap: 16px; align-self: stretch; }
+
+  .site-footer { padding-top: 74px; }
+  .site-footer__top { grid-template-columns: minmax(0, 1fr); gap: 38px; }
+  .site-footer__brand { width: 230px; }
+  .site-footer__nav { grid-template-columns: repeat(2, auto); justify-content: start; gap: 14px 44px; }
+  .site-footer__contact { justify-self: start; max-width: none; }
+  .site-footer__base { flex-direction: column; }
+}
+
+@media (max-width: 800px) {
+  .who { --who-clip: polygon(20% 0, 100% 0, 100% 78%, 80% 100%, 0 100%, 0 28%); display: flex; flex-direction: column; gap: 0; padding: 88px var(--pad) 96px; }
+  .who__heading h2 { font-size: clamp(52px, 12vw, 78px); }
+  .who__intro { margin-top: 26px; padding: 0; }
+  .who__intro p { font-size: 16px; }
+  .who__media { width: 100%; }
+  .who__media--port { order: 3; height: clamp(300px, 66vw, 520px); margin-top: 54px; }
+  .who__proofs { order: 4; margin: 30px 0 0; }
+  .who__proofs li { padding: 17px 0; }
+  .who__media--documents { order: 5; height: clamp(310px, 70vw, 520px); margin-top: 44px; }
+  /* Inside the footprint figure the key is a two-column list under the map, not
+     the legend column it is at desktop — there is no spare width down here. */
+  .who__map { order: 6; display: block; margin-top: 52px; }
+  .who__map-stage { max-width: none; }
+  .who__map-caption > :last-child { display: none; }
+  .who__map .who__markets { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 20px; margin-top: 24px; }
+  .who__map .who__markets li { padding: 10px 0 10px 15px; }
+  .who__map .who__markets li::before { top: 13px; width: 7px; height: 7px; }
+  .who__map-label { display: none; }
+  /* Six labels in a frame this narrow is a thicket, so down here the map is
+     read with the key and the labels are held back — except the one you picked,
+     which is the whole point of picking it. The tap that lights a market also
+     names it on the map. */
+  .who__map.has-active .who__map-label.is-active { display: block; }
+}
+
+@media (max-width: 820px) {
+  .divisions { padding: 78px 24px 90px; }
+  .divisions__heading h2 { font-size: clamp(54px, 12vw, 78px); }
+  .divisions__track { display: block; min-height: 0; }
+  .division { min-width: 0; border-left: 0; border-top: 1px solid var(--d-rule); transition: none; }
+  .division:first-child { border-top: 0; }
+  .division h3 button { min-height: 84px; padding: 18px 20px; }
+  .division__number { min-width: 90px; font-size: 52px; }
+  /* The cards stack full width down here, so the desktop squeeze does not apply:
+     the control returns to the flow and the closed state matches the open one. */
+  .division__control { position: static; transform: none; margin-left: auto; }
+  .division:not(.is-active) h3 button { padding: 18px 20px; gap: 20px; }
+  .division:not(.is-active) .division__number { font-size: 52px; }
+  .division:not(.is-active) .division__name { flex: 0 1 auto; writing-mode: initial; min-height: 0; font-size: 18px; }
+  .division__inner { padding: 0 22px 28px; display: block; }
+  .division__inner > p { margin: 4px 0 20px; }
+  .division__inner > a { display: inline-block; margin-bottom: 32px; }
+  .division__inner figure { height: min(64vw, 430px); }
+  .division__inner small { display: block; margin-top: 26px; }
+}
+
+@media (max-width: 560px) {
+  :root { --pad: 22px; }
+  /* On a phone the fold is spent before the headline even starts: a 96px bar,
+     a 230px mark inside it and a near-square 410px media block carried the h1
+     down to 621px, so only its first two lines cleared the browser chrome and
+     the sentence arrived cut in half. Trimming the bar to 74, the mark to 180,
+     the hero's top padding and the media block to a landscape 322 buys back
+     ~150px — enough that the headline now reads whole before the fold, and the
+     landscape frame stops being cropped into a square by its own container. */
+  .site-header { height: 74px; }
+  .brand { width: 180px; }
+  .mobile-menu { inset-block-start: 74px; }
+  .hero { padding-top: 16px; }
+  .hero-media { height: clamp(260px, 82vw, 340px); margin-bottom: 30px; }
+  .eyebrow { margin-bottom: 18px; }
+  h1 { font-size: clamp(48px, 13.2vw, 66px); }
+  .sector-rail a { letter-spacing: .1em; font-size: 9px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+
+/* ==========================================================================
+   Intro animation  (intro.js + generated intro-data.js)
+
+   A full-bleed forest panel holding an SVG dot-matrix world map. Every layer
+   is fixed and only its opacity is animated, so nothing reflows and nothing
+   lays out per frame. The panel itself never animates in — it is the ground —
+   it only lifts away on the diagonal at the end.
+
+   Class names are namespaced .site-intro__* because the hero's lead paragraph
+   already owns a bare `.intro`.
+   ========================================================================== */
+
+.site-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;                 /* no JS => no intro at all */
+  overflow: hidden;
+  background: var(--forest-dark);
+  opacity: 1;
+  transform: translateY(0);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  transition: transform 880ms var(--ease-out), clip-path 880ms var(--ease-out);
+  will-change: transform, clip-path;
+}
+.js .site-intro { display: block; }
+
+/* The lift: the panel slides up and its lower edge is cut on a diagonal, so the
+   hero is revealed along the same clip language the rest of the page uses. */
+.site-intro--out {
+  transform: translateY(-102%);
+  clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+  pointer-events: none;
+}
+
+html.is-intro { overflow: hidden; }
+
+.site-intro__stage { position: absolute; inset: 0; z-index: 0; }
+.site-intro__map { display: block; width: 100%; height: 100%; }
+
+/* A vignette over the dot field. It does two jobs: it settles the eye on the
+   African markets rather than the whole world, and it guarantees the caption
+   and skip button have something dark to sit on wherever the dots land — the
+   caption is 11px sage, which the dot field swallowed whole. */
+.site-intro::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(118% 88% at 62% 46%,
+      rgba(16, 36, 31, 0) 32%, rgba(16, 36, 31, .5) 76%, rgba(16, 36, 31, .8) 100%),
+    linear-gradient(to top, rgba(16, 36, 31, .72), rgba(16, 36, 31, 0) 28%);
+}
+
+/* ---------------------------------------------------------------- layers */
+/* will-change promotes each layer up front, so the first raster of the 3,900
+   dot subpaths happens off the critical path instead of stalling the frame the
+   layer is first shown. Measured: 3 stalls / 231ms -> 1 stall / 50ms. */
+.site-intro__layer {
+  opacity: 0;
+  transition: opacity 900ms var(--ease-out);
+  will-change: opacity;
+}
+
+/* The scan hairline is driven per-band from JS; the layer opacities below only
+   gate the stages that come after it. */
+.site-intro__graticule { opacity: 0; transition: opacity 1400ms var(--ease-out); }
+.site-intro__world     { opacity: 0; transition: none; }   /* bands set their own */
+.site-intro__africa    { transition-duration: 1100ms; }
+.site-intro__focus-dots{ transition-duration: 800ms; }
+.site-intro__outlines  { transition-duration: 1100ms; }
+.site-intro__labels    { transition-duration: 600ms; }
+.site-intro__nodes     { transition-duration: 600ms; }
+.site-intro__arcs      { transition-duration: 400ms; }
+.site-intro__pulses    { transition: none; }
+
+.is-live    .site-intro__graticule { opacity: .5; }
+.is-live    .site-intro__world     { opacity: 1; }
+.is-scanning .site-intro__scan     { opacity: .92; }
+.is-scan-done .site-intro__scan    { opacity: 0; transition: opacity 500ms ease-out; }
+.is-africa  .site-intro__africa    { opacity: 1; }
+.is-focus   .site-intro__focus-dots{ opacity: 1; }
+.is-outlines .site-intro__outlines { opacity: 1; }
+.is-labels  .site-intro__labels    { opacity: 1; }
+.is-nodes   .site-intro__nodes     { opacity: 1; }
+/* Without these the arcs and pulses keep the layer default of opacity 0 and
+   never appear, however far their own draw-on transitions have run. */
+.is-arcs    .site-intro__arcs      { opacity: 1; }
+.is-arcs    .site-intro__pulses    { opacity: 1; }
+
+/* ------------------------------------------------------------------ marks */
+.site-intro__graticule path {
+  fill: none;
+  stroke: var(--forest);
+  stroke-width: calc(var(--hair, 1) * 1px);
+}
+.site-intro__world path,
+.site-intro__africa path,
+.site-intro__focus-dots path { fill: var(--paper); }
+.site-intro__africa path     { fill: var(--sage); }
+.site-intro__focus-dots path { fill: var(--paper); }
+
+/* No filter here: a drop-shadow over a full-height line re-rasterises an
+   offscreen buffer on every frame of the sweep. Measured: 3 stalls / 231ms
+   -> 2 stalls / 134ms with the filter gone. A crisp hairline also sits better
+   against the page's hairline rules than a glow did. */
+.site-intro__scan {
+  stroke: var(--paper);
+  stroke-width: calc(var(--hair, 1) * 1.5px);
+  opacity: 0;
+  transition: opacity 320ms ease-out;
+}
+
+/* Country outlines draw on via a normalised dash offset. */
+.site-intro__outlines path {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: calc(var(--hair, 1) * 1.3px);
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1200ms var(--ease-out);
+}
+.is-outlines .site-intro__outlines path { stroke-dashoffset: 0; }
+.site-intro__outlines path:nth-of-type(2) { transition-delay: 130ms; }
+.site-intro__outlines path:nth-of-type(3) { transition-delay: 260ms; }
+
+.site-intro__arcs path {
+  fill: none;
+  stroke: var(--sage);
+  stroke-width: calc(var(--hair, 1) * 1.1px);
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 620ms var(--ease-out);
+}
+.site-intro__arcs path.is-focus {
+  stroke: var(--paper);
+  stroke-width: calc(var(--hair, 1) * 1.6px);
+}
+.is-arcs .site-intro__arcs path { stroke-dashoffset: 0; }
+.site-intro__pulses circle { fill: var(--paper); }
+
+/* --------------------------------------------------------------- nodes */
+.site-intro__node rect { fill: var(--sage); }
+.site-intro__node.is-focus rect { fill: var(--paper); }
+.site-intro__node-ring {
+  fill: none !important;
+  stroke: var(--sage);
+  stroke-width: calc(var(--hair, 1) * 1.2px);
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+}
+.is-nodes .site-intro__node-ring {
+  opacity: 1;
+  animation: site-intro-ring 2600ms var(--ease-out) infinite;
+}
+@keyframes site-intro-ring {
+  0%   { transform: scale(.55); opacity: .9; }
+  70%  { transform: scale(1.35); opacity: 0; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+/* -------------------------------------------------------------- labels */
+.site-intro__label-head,
+.site-intro__label-sub {
+  font-family: "Manrope", Arial, sans-serif;
+  /* The labels sit on top of the dot field — at the full world view Ghana and
+     Zimbabwe land squarely on it — so each glyph is struck through with a
+     stroke in the panel's own ground colour before it is filled. paint-order
+     puts that under the fill rather than half over it, which is a halo rather
+     than an outline, and it is what keeps a ledger line from running through a
+     word. */
+  paint-order: stroke;
+  stroke: var(--forest-dark);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  /* text-anchor is set per label from JS: the near edge is anchored so the
+     leader meets the text edge rather than running through the word. */
+}
+.site-intro__label-head {
+  fill: var(--paper);
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: .18em;
+}
+.site-intro__label-sub {
+  fill: var(--sage);
+  font-size: 11.5px;
+  font-weight: 300;
+  letter-spacing: .22em;
+}
+.site-intro__leader {
+  stroke: var(--sage);
+  stroke-width: calc(var(--hair, 1) * 1px);
+  opacity: 0;
+  transition: opacity 600ms var(--ease-out);
+}
+.site-intro__label {
+  opacity: 0;
+  /* No transform-box here: the group's transform comes from the transform
+     attribute, and fill-box would resolve transform-origin against the text
+     bbox instead of the anchor, displacing every label by (1 - k) * bboxOrigin.
+     This element only ever animates opacity. */
+  transition: opacity 700ms var(--ease-out);
+}
+.is-labels .site-intro__leader { opacity: .8; }
+.is-labels .site-intro__label  { opacity: 1; }
+.is-labels .site-intro__label:nth-of-type(2) { transition-delay: 120ms; }
+.is-labels .site-intro__label:nth-of-type(3) { transition-delay: 240ms; }
+
+/* -------------------------------------------------------------- chrome */
+.site-intro__caption {
+  position: absolute;
+  z-index: 2;                 /* above the vignette */
+  inset-block-end: clamp(28px, 5vh, 58px);
+  inset-inline-start: var(--pad);
+  margin: 0;
+  color: var(--sage);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out);
+}
+.is-caption .site-intro__caption { opacity: 1; transform: none; }
+
+.site-intro__skip {
+  position: absolute;
+  z-index: 2;                 /* above the vignette */
+  inset-block-start: clamp(22px, 4vh, 40px);
+  inset-inline-end: var(--pad);
+  padding: 10px 18px;
+  border: 1px solid rgba(143, 167, 155, .45);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--mist);
+  font: inherit;
+  font-size: 10.5px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out),
+              border-color 300ms ease, color 300ms ease;
+}
+.is-skip .site-intro__skip { opacity: 1; transform: none; }
+.site-intro__skip:hover { border-color: var(--paper); color: var(--paper); }
+.site-intro__skip:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; }
+
+/* The animated layers are decorative; the caption and skip button are the only
+   interactive chrome, and the skip button must stay reachable by keyboard. */
+@media (max-width: 700px) {
+  .site-intro__label-head { font-size: 15px; }
+  .site-intro__label-sub  { font-size: 10.5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .site-intro { display: none !important; }
+  /* The footprint is a static figure either way; only its entry fades, and
+     picking a market changes state rather than animating it. */
+  .who__map-label, .who__markets li::before,
+  .who-map__grid, .who-map__africa, .who-map__focus,
+  .who-map__outline, .who-map__node { transition: none !important; }
+  /* Reveals become plain visibility: no travel, no fade, nothing to wait for. */
+  html.js [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
